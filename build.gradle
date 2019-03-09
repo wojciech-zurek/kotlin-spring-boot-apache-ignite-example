@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'org.jetbrains.kotlin.jvm' version '1.2.71'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.2.71'
+}
+
+ext{
+	igniteVersion = "2.7.0"
+	reactorTestVersion = "3.2.6.RELEASE"
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'eu.wojciechzurek'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation "org.apache.ignite:ignite-spring-data:$igniteVersion"
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "io.projectreactor:reactor-test:$reactorTestVersion"
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
+}
+
+compileKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '1.8'
+	}
+}
+
+compileTestKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '1.8'
+	}
+}
